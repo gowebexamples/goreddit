@@ -1,0 +1,18 @@
+{{define "header"}}
+<h5>Create a new post in</h5>
+<h1 class="mb-0">{{.Thread.Title}}</h1>
+{{end}}
+
+{{define "content"}}
+<form action="/threads/{{.Thread.ID}}" method="POST">
+    <div class="form-group">
+        <label>Title</label>
+        <input name="title" type="text" class="form-control" placeholder="Give your post a great title">
+    </div>
+    <div class="form-group">
+        <label>Text</label>
+        <textarea name="content" class="form-control" rows="3" placeholder="Tell people about your thoughts"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Post</button>
+</form>
+{{end}}

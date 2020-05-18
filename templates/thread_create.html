@@ -1,0 +1,18 @@
+{{define "header"}}
+<h1 class="mb-0">Create a new thread</h1>
+{{end}}
+
+{{define "content"}}
+<form action="/threads" method="POST">
+    <div class="form-group">
+        <label>Title</label>
+        <input name="title" type="text" class="form-control" placeholder="Give your thread a great title">
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <textarea name="description" class="form-control" rows="3"
+            placeholder="Tell people what your thread is about"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Thread</button>
+</form>
+{{end}}
