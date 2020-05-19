@@ -1,8 +1,8 @@
 package web
 
 import (
+	"html/template"
 	"net/http"
-	"text/template"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
