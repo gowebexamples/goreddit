@@ -22,7 +22,34 @@ func (s *PostStore) Post(id uuid.UUID) (goreddit.Post, error) {
 
 func (s *PostStore) PostsByThread(threadID uuid.UUID) ([]goreddit.Post, error) {
 	var pp []goreddit.Post
-	if err := s.Select(&pp, `SELECT * FROM posts WHERE thread_id = $1`, threadID); err != nil {
+	var query = `
+		SELECT
+			posts.*,
+			COUNT(comments.*) AS comments_count
+		FROM posts
+		JOIN comments ON comments.post_id = posts.id
+		WHERE thread_id = $1
+		GROUP BY posts.id
+		ORDER BY votes DESC`
+	if err := s.Select(&pp, query, threadID); err != nil {
+		return []goreddit.Post{}, fmt.Errorf("error getting posts: %w", err)
+	}
+	return pp, nil
+}
+
+func (s *PostStore) Posts() ([]goreddit.Post, error) {
+	var pp []goreddit.Post
+	var query = `
+		SELECT
+			posts.*,
+			COUNT(comments.*) AS comments_count,
+			threads.title AS thread_title
+		FROM posts
+		JOIN comments ON comments.post_id = posts.id
+		JOIN threads ON threads.id = posts.thread_id
+		GROUP BY posts.id, threads.title
+		ORDER BY votes DESC`
+	if err := s.Select(&pp, query); err != nil {
 		return []goreddit.Post{}, fmt.Errorf("error getting posts: %w", err)
 	}
 	return pp, nil

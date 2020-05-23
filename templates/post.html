@@ -18,9 +18,9 @@
 {{define "content"}}
 <div class="card mb-4">
     <div class="text-right">
-        <form>
-            <textarea class="form-control border-0 border-bottom-1 p-3" placeholder="What are your thoughts?"
-                rows="4"></textarea>
+        <form action="/threads/{{.Thread.ID}}/{{.Post.ID}}" method="POST">
+            <textarea name="content" class="form-control border-0 border-bottom-1 p-3"
+                placeholder="What are your thoughts?" rows="4"></textarea>
             <div class="border-top p-1">
                 <button class="btn btn-primary btn-sm">Comment</button>
             </div>
@@ -29,47 +29,17 @@
 </div>
 
 <div class="card mb-4 px-4">
+    {{range .Comments}}
     <div class="d-flex my-4">
         <div class="text-center flex-shrink-0" style="width: 1.5rem">
-            <a href="#" class="d-block text-body text-decoration-none">&#x25B2</a>
-            <div>10</div>
-            <a href="#" class="d-block text-body text-decoration-none">&#x25BC</a>
+            <a href="/comments/{{.ID}}/vote?dir=up" class="d-block text-body text-decoration-none">&#x25B2</a>
+            <div>{{.Votes}}</div>
+            <a href="/comments/{{.ID}}/vote?dir=down" class="d-block text-body text-decoration-none">&#x25BC</a>
         </div>
         <div class="pl-4">
-            <p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-                voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-                gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            </p>
+            <p class="card-text" style="white-space: pre-line;">{{.Content}}</p>
         </div>
     </div>
-    <div class="d-flex my-4">
-        <div class="text-center flex-shrink-0" style="width: 1.5rem">
-            <a href="#" class="d-block text-body text-decoration-none">&#x25B2</a>
-            <div>10</div>
-            <a href="#" class="d-block text-body text-decoration-none">&#x25BC</a>
-        </div>
-        <div class="pl-4">
-            <p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-                voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-                gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            </p>
-        </div>
-    </div>
-    <div class="d-flex my-4">
-        <div class="text-center flex-shrink-0" style="width: 1.5rem">
-            <a href="#" class="d-block text-body text-decoration-none">&#x25B2</a>
-            <div>2</div>
-            <a href="#" class="d-block text-body text-decoration-none">&#x25BC</a>
-        </div>
-        <div class="pl-4">
-            <p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-                voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
-                gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            </p>
-        </div>
-    </div>
+    {{end}}
 </div>
 {{end}}

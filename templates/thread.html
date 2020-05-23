@@ -7,13 +7,13 @@
 <div class="card mb-4">
     <div class="d-flex">
         <div class="py-4 pl-4 text-center flex-shrink-0" style="width: 3rem">
-            <a href="#" class="d-block text-body text-decoration-none">
+            <a href="/threads/{{$.Thread.ID}}/{{.ID}}/vote?dir=up" class="d-block text-body text-decoration-none">
                 <svg viewBox="0 0 10 16" width="10" height="16">
                     <path fill-rule="evenodd" d="M10 10l-1.5 1.5L5 7.75 1.5 11.5 0 10l5-5 5 5z"></path>
                 </svg>
             </a>
             <div class="mt-1">{{.Votes}}</div>
-            <a href="#" class="d-block text-body text-decoration-none">
+            <a href="/threads/{{$.Thread.ID}}/{{.ID}}/vote?dir=down" class="d-block text-body text-decoration-none">
                 <svg viewBox="0 0 10 16" width="10" height="16">
                     <path fill-rule="evenodd" d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6l-5 5z"></path>
                 </svg>
@@ -22,7 +22,7 @@
         <div class="card-body">
             <h5 class="card-title">{{.Title}}</h5>
             <p class="card-text">{{.Content}}</p>
-            <a href="/threads/{{$.Thread.ID}}/{{.ID}}">X Comments</a>
+            <a href="/threads/{{$.Thread.ID}}/{{.ID}}">{{.CommentsCount}} Comments</a>
         </div>
     </div>
 </div>
