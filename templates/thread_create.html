@@ -4,6 +4,7 @@
 
 {{define "content"}}
 <form action="/threads" method="POST">
+    {{.CSRF}}
     <div class="form-group">
         <label>Title</label>
         <input name="title" type="text" class="form-control" placeholder="Give your thread a great title">

@@ -19,6 +19,7 @@
 <div class="card mb-4">
     <div class="text-right">
         <form action="/threads/{{.Thread.ID}}/{{.Post.ID}}" method="POST">
+            {{.CSRF}}
             <textarea name="content" class="form-control border-0 border-bottom-1 p-3"
                 placeholder="What are your thoughts?" rows="4"></textarea>
             <div class="border-top p-1">
