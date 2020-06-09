@@ -27,7 +27,7 @@ func (s *PostStore) PostsByThread(threadID uuid.UUID) ([]goreddit.Post, error) {
 			posts.*,
 			COUNT(comments.*) AS comments_count
 		FROM posts
-		JOIN comments ON comments.post_id = posts.id
+		LEFT JOIN comments ON comments.post_id = posts.id
 		WHERE thread_id = $1
 		GROUP BY posts.id
 		ORDER BY votes DESC`
@@ -45,7 +45,7 @@ func (s *PostStore) Posts() ([]goreddit.Post, error) {
 			COUNT(comments.*) AS comments_count,
 			threads.title AS thread_title
 		FROM posts
-		JOIN comments ON comments.post_id = posts.id
+		LEFT JOIN comments ON comments.post_id = posts.id
 		JOIN threads ON threads.id = posts.thread_id
 		GROUP BY posts.id, threads.title
 		ORDER BY votes DESC`
