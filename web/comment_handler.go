@@ -3,13 +3,15 @@ package web
 import (
 	"net/http"
 
+	"github.com/alexedwards/scs/v2"
 	"github.com/go-chi/chi"
 	"github.com/google/uuid"
 	"github.com/gowebexamples/goreddit"
 )
 
 type CommentHandler struct {
-	store goreddit.Store
+	store    goreddit.Store
+	sessions *scs.SessionManager
 }
 
 func (h *CommentHandler) Store() http.HandlerFunc {
@@ -31,6 +33,8 @@ func (h *CommentHandler) Store() http.HandlerFunc {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
+
+		h.sessions.Put(r.Context(), "flash", "Your comment has been submitted.")
 
 		http.Redirect(w, r, r.Referer(), http.StatusFound)
 	}
