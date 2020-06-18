@@ -8,11 +8,21 @@
     {{.CSRF}}
     <div class="form-group">
         <label>Title</label>
-        <input name="title" type="text" class="form-control" placeholder="Give your post a great title">
+        <input name="title" type="text" class="form-control {{with .Form.Errors.Title}}is-invalid{{end}}"
+            placeholder="Give your post a great title" value="{{with .Form.Title}}{{.}}{{end}}">
+        {{with .Form.Errors.Title}}
+        <div class="invalid-feedback">{{.}}</div>
+        {{end}}
     </div>
     <div class="form-group">
         <label>Text</label>
-        <textarea name="content" class="form-control" rows="3" placeholder="Tell people about your thoughts"></textarea>
+        <textarea name="content" class="form-control {{with .Form.Errors.Content}}is-invalid{{end}}" rows="3"
+            placeholder="Tell people about your thoughts">
+            {{- with .Form.Content}}{{.}}{{end -}}
+        </textarea>
+        {{with .Form.Errors.Content}}
+        <div class="invalid-feedback">{{.}}</div>
+        {{end}}
     </div>
     <button type="submit" class="btn btn-primary">Submit Post</button>
 </form>

@@ -7,12 +7,21 @@
     {{.CSRF}}
     <div class="form-group">
         <label>Title</label>
-        <input name="title" type="text" class="form-control" placeholder="Give your thread a great title">
+        <input name="title" type="text" class="form-control {{with .Form.Errors.Title}}is-invalid{{end}}"
+            placeholder="Give your thread a great title" value="{{with .Form.Title}}{{.}}{{end}}">
+        {{with .Form.Errors.Title}}
+        <div class="invalid-feedback">{{.}}</div>
+        {{end}}
     </div>
     <div class="form-group">
         <label>Description</label>
-        <textarea name="description" class="form-control" rows="3"
-            placeholder="Tell people what your thread is about"></textarea>
+        <textarea name="description" class="form-control {{with .Form.Errors.Description}}is-invalid{{end}}" rows="3"
+            placeholder="Tell people what your thread is about">
+            {{- with .Form.Description}}{{.}}{{end -}}
+        </textarea>
+        {{with .Form.Errors.Description}}
+        <div class="invalid-feedback">{{.}}</div>
+        {{end}}
     </div>
     <button type="submit" class="btn btn-primary">Create Thread</button>
 </form>
