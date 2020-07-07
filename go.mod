@@ -10,5 +10,6 @@ require (
 	github.com/gorilla/csrf v1.7.0
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/lib/pq v1.4.0
+	golang.org/x/crypto v0.0.0-20200604202706-70a84ac30bf9
 	google.golang.org/appengine v1.6.5 // indirect
 )

@@ -21,6 +21,7 @@ func NewHandler(store goreddit.Store, sessions *scs.SessionManager, csrfKey []by
 	threads := ThreadHandler{store: store, sessions: sessions}
 	posts := PostHandler{store: store, sessions: sessions}
 	comments := CommentHandler{store: store, sessions: sessions}
+	users := UserHandler{store: store, sessions: sessions}
 
 	h.Use(middleware.Logger)
 	h.Use(csrf.Protect(csrfKey, csrf.Secure(false)))
@@ -40,6 +41,8 @@ func NewHandler(store goreddit.Store, sessions *scs.SessionManager, csrfKey []by
 		r.Post("/{threadID}/{postID}", comments.Store())
 	})
 	h.Get("/comments/{id}/vote", comments.Vote())
+	h.Get("/register", users.Register())
+	h.Post("/register", users.RegisterSubmit())
 
 	return h
 }

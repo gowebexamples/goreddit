@@ -25,6 +25,12 @@ type Comment struct {
 	Votes   int       `db:"votes"`
 }
 
+type User struct {
+	ID       uuid.UUID `db:"id"`
+	Username string    `db:"username"`
+	Password string    `db:"password"`
+}
+
 type ThreadStore interface {
 	Thread(id uuid.UUID) (Thread, error)
 	Threads() ([]Thread, error)
@@ -50,8 +56,17 @@ type CommentStore interface {
 	DeleteComment(id uuid.UUID) error
 }
 
+type UserStore interface {
+	User(id uuid.UUID) (User, error)
+	UserByUsername(username string) (User, error)
+	CreateUser(u *User) error
+	UpdateUser(u *User) error
+	DeleteUser(id uuid.UUID) error
+}
+
 type Store interface {
 	ThreadStore
 	PostStore
 	CommentStore
+	UserStore
 }

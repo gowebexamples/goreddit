@@ -1,0 +1,26 @@
+{{define "header"}}
+<h1 class="mb-0">Register</h1>
+{{end}}
+
+{{define "content"}}
+<form action="/register" method="POST">
+    {{.CSRF}}
+    <div class="form-group">
+        <label>Username</label>
+        <input name="username" type="text" class="form-control {{with .Form.Errors.Username}}is-invalid{{end}}"
+            placeholder="Pick a username" value="{{with .Form.Username}}{{.}}{{end}}">
+        {{with .Form.Errors.Username}}
+        <div class="invalid-feedback">{{.}}</div>
+        {{end}}
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input name="password" type="password" class="form-control {{with .Form.Errors.Password}}is-invalid{{end}}"
+            placeholder="Create a password" value="{{with .Form.Password}}{{.}}{{end}}">
+        {{with .Form.Errors.Password}}
+        <div class="invalid-feedback">{{.}}</div>
+        {{end}}
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+{{end}}
