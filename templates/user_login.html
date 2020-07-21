@@ -1,0 +1,26 @@
+{{define "header"}}
+<h1 class="mb-0">Login</h1>
+{{end}}
+
+{{define "content"}}
+<form action="/login" method="POST">
+    {{.CSRF}}
+    <div class="form-group">
+        <label>Username</label>
+        <input name="username" type="text" class="form-control {{with .Form.Errors.Username}}is-invalid{{end}}"
+            placeholder="Enter your username" value="{{with .Form.Username}}{{.}}{{end}}">
+        {{with .Form.Errors.Username}}
+        <div class="invalid-feedback">{{.}}</div>
+        {{end}}
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input name="password" type="password" class="form-control {{with .Form.Errors.Password}}is-invalid{{end}}"
+            placeholder="Enter your password" value="{{with .Form.Password}}{{.}}{{end}}">
+        {{with .Form.Errors.Password}}
+        <div class="invalid-feedback">{{.}}</div>
+        {{end}}
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+{{end}}

@@ -17,7 +17,13 @@
     <nav class="navbar navbar-light container">
         <a class="navbar-brand text-primary" href="/">goreddit</a>
         <div class="flex-fill"></div>
-        <a class="text-primary" href="/register">Register</a>
+        {{if .LoggedIn}}
+        {{.User.Username}}
+        <a class="text-primary ml-3" href="/logout">Logout</a>
+        {{else}}
+        <a class="text-primary" href="/login">Login</a>
+        <a class="text-primary ml-3" href="/register">Register</a>
+        {{end}}
     </nav>
     <div class="header bg-light border-bottom border-top py-5">
         <div class="container">
